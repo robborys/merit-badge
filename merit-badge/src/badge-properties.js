@@ -1,29 +1,29 @@
-import { LitElement, html, css } from 'lit';
-import "../src/date-title.js";
+import { LitElement, html, css } from "lit";
 
-
-class MeritBadge extends LitElement {
+//FOR COMPILE
+class BadgeProperties extends LitElement {
   static properties = {
-    unlockDate: { type: String },
-    badgeLogo: { type: String },
-    badgeTitle: { type: String },
+    date: { type: String },
+    logo: { type: String },
+    title: { type: String },
     detailsIcon: { type: String },
     details: { type: String },
     verificationLink: { type: String },
     skills: { type: String },
     skillsOpened: { type: Boolean },
     detailsOpened: { type: Boolean },
-  }
+  };
 
   static styles = css`
-  .badge
+
+.badge
   {
     width: 200px;
     height: 200px;
     background: red;
     border-radius: 50%
     padding: 20px;
-    margin: 20px;
+    margin: 10px;
     background: #ff0030;
     color: #fff;
     font-size: 21px;
@@ -34,33 +34,15 @@ class MeritBadge extends LitElement {
     box-shadow: 0 0 0 4px #ff0030, 2px 1px 6px 4px rgba(10, 10, 0, 0.5);
     text-shadow: -1px -1px #aa3030;
     font-weight: normal;
-    position: relative;    
- 
+    text-align: center;
   }
 
   .badgeImage
   {
-    width: 75px;
-    height: 75px;
     position: absolute;
-    top: -24%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }
-
-  .date-title
-  {
-    position: absolute;
-    top: -24%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .badgepic
-  {
-    position: absolute;
-    top: 34%;
-    left: 37%;
   }
 
   `;
@@ -68,25 +50,23 @@ class MeritBadge extends LitElement {
   constructor() {
     super();
 
-  
   }
 
   render() {
     return html`
 
-
 <div class="badge">
-  <date-title class="date-title" title="fart of the middle ages" date="08.22.23"></date-title>
-  <div class="badgeImage">
-  </div>
-  <img class="badgepic" src="https://cdn-icons-png.flaticon.com/512/2619/2619273.png" alt="shield" width=50 height=50>
-
+<div class="badgeImage">
+<img src="https://www.freeiconspng.com/thumbs/shield-png/shield-png-4.png" alt="shield" width="50" height="60">
+</div>
 
 </div>
 
 
     `;
   }
+
+
 }
 
-customElements.define('merit-badge', MeritBadge);
+customElements.define("badge-properties", BadgeProperties);
