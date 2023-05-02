@@ -108,14 +108,12 @@ class MeritBadge extends LitElement {
       border: 1px solid black;
       border-radius: 4px;
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-      display: none;
       color: black;
       text-shadow: none;
       font-size: 15px;
+      font-family: "Monaco";
     }
-    .button:hover .popover {
-      display: block;
-    }
+
 
 
 
@@ -125,12 +123,13 @@ class MeritBadge extends LitElement {
 
   constructor() {
     super();
-    this.badgeDate = "";
-    this.badgeImage = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/How_to_use_icon.svg/1200px-How_to_use_icon.svg.png";
+    const currentDate = new Date();
+    this.badgeDate = currentDate.toLocaleDateString();
+    this.badgeImage = "https://cdn.icon-icons.com/icons2/2620/PNG/512/among_us_player_red_icon_156942.png";
     this.badgeTitle = "Virgin Coding Expert";
     this.badgeDetails = "This badge shows that you can code in html and be a virgin at the same time!";
     this.hyperLink = "https://hax.psu.edu/";
-    this.badgeSkills = ["Html, ","CSS, ","JavaScript, "];
+    this.badgeSkills = ["Gamer ", "Cool ", "Epic "];
     this.skillsOpened = false;
     this.detailsOpened = false;
   }
@@ -145,17 +144,13 @@ class MeritBadge extends LitElement {
 
   <div class="details">
 
-    <div class="button" @click="${this.handleClick}">
+    <div class="button" @click="${this.skillClick}">
       <i class="fas fa-info-circle"></i> 
     
       <img class="detailsicon" src="https://www.iconpacks.net/icons/1/free-information-icon-348-thumb.png"
-      alt="linkicons" height= 20px width= 20px @click="${this.skillClick}">
-      
+      alt="linkicons" height= 20px width= 20px >
 
-        <div class="popover">
-          <p> <h3>Skills</h3> ${this.badgeSkills} <h3>Details</h3> "${this.badgeDetails}"</p>
-        </div>
-    </div>
+  </div>
   </div>
 
   <div class="verificationlink">
@@ -168,19 +163,20 @@ class MeritBadge extends LitElement {
 </div>
 
 <absolute-position-behavior
-            justify
-            position="bottom"
-            allow-overlap
-            sticky
-            auto
-            .target="${this.activeNode}"
-            ?hidden="${!this.skillsOpened}"
->
-       
-</absolute-position-behavior>
-
-
-
+        class="popover"
+        justify
+        position="bottom"
+        allow-overlap
+        sticky
+        auto
+        .target="${this.activeNode}"
+        ?hidden="${!this.skillsOpened}"
+      >
+        <h3>Details</h3>
+        <p>${this.badgeDetails}</p>
+        <h3>Skills</h3>
+        <p>${this.badgeSkills}</p>
+      </absolute-position-behavior>
 
     `;
   }
@@ -197,29 +193,12 @@ class MeritBadge extends LitElement {
 
   skillClick(e) {
     this.skillsOpened = !this.skillsOpened;
-    this.detailsOpened = false;
   }
 
 
-  connectedCallback() {
-    super.connectedCallback();
-    this.setupPopover();
-  }
 
-  setupPopover() {
-    const button = this.querySelector('.button');
-    const popoverContainer = this.shadowRoot.querySelector('.popover');
 
-    button.addEventListener('click', () => {
-      popoverContainer.classList.toggle('show');
-    });
 
-    document.addEventListener('click', (event) => {
-      if (!this.contains(event.target)) {
-        popoverContainer.classList.remove('show');
-      }
-    });
-  }
 }
 
 
