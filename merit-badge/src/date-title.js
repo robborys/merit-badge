@@ -9,18 +9,21 @@ static get properties() {
     return {
         date: { type: String },
         title: { type: String },
+
     };
 }
 
 static get styles() {
     return css`
       .container {
+        color: white;
         width: 300px;
         height: 300px;
         margin: 0 auto;
       }
       div.circTxt1,
       div.circTxt2 {
+        color: white;
         border-radius: 50%;
         display: inline-block;
         position: absolute;
@@ -30,6 +33,7 @@ static get styles() {
         transform-origin: 50% 50%;
       }
       div.circTxt1 p {
+        color: white;
         font-size: 2em;
         margin: 0;
         color: white;

@@ -18,24 +18,25 @@ class MeritBadge extends LitElement {
     badgeSkills: { type: String },
     skillsOpened: { type: Boolean },
     detailsOpened: { type: Boolean },
+    badgeColor: { type: String }
   }
 
   static styles = css`
   .badge
   {
+    color: white;
+    margin: 20px;
     width: 200px;
     height: 200px;
     border-radius: 50%
     padding: 20px;
-    margin: 20px;
-    background: var(--simple-colors-default-theme-green-8);
-    color: white;
+    background: var(--badge-color, var(--simple-colors-default-theme));
     font-size: 21px;
     font-weight: bold;
     line-height: 1.3em;
     border: 2px dashed #fff;
     border-radius: 50%;
-    box-shadow: 0 0 0 4px var(--simple-colors-default-theme-green-8), 3px 2px 7px 5px var(--simple-colors-default-theme-brown-9);
+    box-shadow: 0 0 0 4px var(--badge-color, var(--simple-colors-default-theme)), 3px 1.5px 9px 6px var(--simple-colors-default-theme-grey-9);
     font-weight: normal;
     position: relative;    
     font-family: "Monaco";
@@ -112,7 +113,10 @@ class MeritBadge extends LitElement {
       text-shadow: none;
       font-size: 15px;
       font-family: "Monaco";
+      box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+      border-radius: 15px;
     }
+   
 
 
 
@@ -125,18 +129,20 @@ class MeritBadge extends LitElement {
     super();
     const currentDate = new Date();
     this.badgeDate = currentDate.toLocaleDateString();
-    this.badgeImage = "https://cdn.icon-icons.com/icons2/2620/PNG/512/among_us_player_red_icon_156942.png";
-    this.badgeTitle = "Virgin Coding Expert";
-    this.badgeDetails = "This badge shows that you can code in html and be a virgin at the same time!";
-    this.hyperLink = "https://hax.psu.edu/";
-    this.badgeSkills = ["Gamer ", "Cool ", "Epic "];
+    this.badgeImage = "";
+    this.badgeTitle = "";
+    this.badgeDetails = "";
+    this.hyperLink = "";
+    this.badgeSkills = "";
     this.skillsOpened = false;
     this.detailsOpened = false;
+    this.skillsArray = [];
+    this.badgeColor = ""
   }
 
   render() {
     return html`
-<div class="badge">
+<div class="badge" style="--badge-color: ${this.badgeColor}">
 
   <date-title class="date-title" title="${this.badgeTitle}" date="${this.badgeDate}"></date-title>
 
@@ -146,7 +152,6 @@ class MeritBadge extends LitElement {
 
     <div class="button" @click="${this.skillClick}">
       <i class="fas fa-info-circle"></i> 
-    
       <img class="detailsicon" src="https://www.iconpacks.net/icons/1/free-information-icon-348-thumb.png"
       alt="linkicons" height= 20px width= 20px >
 
@@ -154,7 +159,7 @@ class MeritBadge extends LitElement {
   </div>
 
   <div class="verificationlink">
-    <a href="https://hax.psu.edu/" target="_blank">
+    <a href="${this.hyperLink}" target="_blank">
      <img class="linkicon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Chain_link_icon_slanted.png/800px-Chain_link_icon_slanted.png" alt="detailsicons"
       height= 20px width= 20px>
     </a>
@@ -175,30 +180,31 @@ class MeritBadge extends LitElement {
         <h3>Details</h3>
         <p>${this.badgeDetails}</p>
         <h3>Skills</h3>
-        <p>${this.badgeSkills}</p>
-      </absolute-position-behavior>
+        ${this.skillsArray.map(
+          (item) => html`
+            <ul>
+              <li>${item}</li>
+            </ul>
+          `
+        )}       
+
+  </absolute-position-behavior>
 
     `;
   }
 
   
-
   firstUpdated(changedProperties) {
     if (super.firstUpdated) {
       super.firstUpdated(changedProperties);
     }
     this.activeNode = this.shadowRoot.querySelector(".badge");
-    this.badgeSkills = this.badgeSkills.split(",");
+    this.skillsArray = this.badgeSkills.split(",");
   }
 
   skillClick(e) {
     this.skillsOpened = !this.skillsOpened;
   }
-
-
-
-
-
 }
 
 

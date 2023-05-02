@@ -24,7 +24,8 @@ class BadgeCompile extends LitElement {
     badgeSkills: { type: String },
     skillsOpened: { type: Boolean },
     detailsOpened: { type: Boolean },
-    badgeUnlocked: {type: Boolean}
+    badgeUnlocked: {type: Boolean},
+    badgeColor: {type: String}
   };
 
   static styles = css`
@@ -37,12 +38,13 @@ class BadgeCompile extends LitElement {
   width: 250px;
   justify-content: center;
   align-items: center;
-
+  color: white;
 }
 
 .badges
 {
   order: 1;
+  color: white;
 }
 
 .unlockButton
@@ -82,7 +84,15 @@ class BadgeCompile extends LitElement {
     return html`
       <div class="container">
         ${this.badgeUnlocked
-          ? html`<merit-badge></merit-badge>`
+          ? html`<merit-badge
+          badgeImage="${this.badgeImage}"
+          badgeTitle="${this.badgeTitle}"
+          badgeDetails="${this.badgeDetails}"
+          hyperLink="${this.hyperLink}"
+          badgeSkills=${this.badgeSkills}
+          badgeUnlocked="false"
+          badgeColor="${this.badgeColor}">
+          </merit-badge>`
           : html`<locked-badge></locked-badge>`}
         <button class="unlockButton" @click="${this.unlockButtonClicked}">
           ${this.badgeUnlocked ? "Unlocked" : "Unlock?"}

@@ -32,11 +32,11 @@ class LockedBadge extends LitElement {
 
   .badgepic
   {
-    max-width: 100px;
-    max-height: 100px;
+    max-width: 70px;
+    max-height: 70px;
     align-content: center;
-    padding-left: 50px;
-    padding-top: 40px;
+    padding-left: 65px;
+    padding-top: 58px;
   }
 
 
