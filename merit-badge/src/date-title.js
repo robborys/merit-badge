@@ -32,10 +32,14 @@ static get styles() {
       div.circTxt1 p {
         font-size: 2em;
         margin: 0;
+        color: white;
+
       }
       div.circTxt2 p {
         font-size: 0.8em;
         margin: 0;
+        color: white;
+
       }
       @keyframes moveAround {
         0% {

@@ -1,17 +1,28 @@
 import { LitElement, html, css } from "lit";
+import "@lrnwebcomponents/absolute-position-behavior/absolute-position-behavior.js";
+import "@lrnwebcomponents/simple-icon/simple-icon.js";
+import "@lrnwebcomponents/simple-icon/lib/simple-icons.js";
+import "@lrnwebcomponents/simple-icon/lib/simple-icon-button.js";
+import "../src/date-title.js";
+import "../src/merit-badge.js";
+import "../src/locked-badge.js";
 
-//FOR COMPILE
+//FOR COMPILING THIS IS THE EQUIVELANT OF HIS MERIT BADGE! MY MERIT BADGE WILL BE THE EQUIV OF  STICKER-STICKER ADN THEN BADGE PROPERTIES WILL 
+// BE THE SAME AS HIS MERIT BADGE
+
+
+
+
 class BadgeProperties extends LitElement {
   static properties = {
-    date: { type: String },
-    logo: { type: String },
-    title: { type: String },
-    detailsIcon: { type: String },
-    details: { type: String },
-    verificationLink: { type: String },
-    skills: { type: String },
+    badgeDate: { type: String },
+    badgeImage: { type: String },
+    badgeTitle: { type: String },
+    badgeDetails: { type: String },
+    hyperLink: { type: String },
+    badgeSkills: { type: String },
     skillsOpened: { type: Boolean },
-    detailsOpened: { type: Boolean },
+    badgeUnlocked: {type: Boolean}
   };
 
   static styles = css`
