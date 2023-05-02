@@ -3,17 +3,18 @@ import "@lrnwebcomponents/absolute-position-behavior/absolute-position-behavior.
 import "@lrnwebcomponents/simple-icon/simple-icon.js";
 import "@lrnwebcomponents/simple-icon/lib/simple-icons.js";
 import "@lrnwebcomponents/simple-icon/lib/simple-icon-button.js";
-import "../src/date-title.js";
-import "../src/merit-badge.js";
 import "../src/locked-badge.js";
-
-//FOR COMPILING THIS IS THE EQUIVELANT OF HIS MERIT BADGE! MY MERIT BADGE WILL BE THE EQUIV OF  STICKER-STICKER ADN THEN BADGE PROPERTIES WILL 
-// BE THE SAME AS HIS MERIT BADGE
-
-
+import "../src/merit-badge.js";
+import "../src/date-title.js";
+import confetti from "canvas-confetti";
 
 
-class BadgeProperties extends LitElement {
+//FOR COMPILING INDIVIDUAL MERIT BADGES AND LOCKED BADGES
+
+
+
+
+class BadgeCompile extends LitElement {
   static properties = {
     badgeDate: { type: String },
     badgeImage: { type: String },
@@ -22,62 +23,95 @@ class BadgeProperties extends LitElement {
     hyperLink: { type: String },
     badgeSkills: { type: String },
     skillsOpened: { type: Boolean },
+    detailsOpened: { type: Boolean },
     badgeUnlocked: {type: Boolean}
   };
 
   static styles = css`
 
-.badge
-  {
-    width: 200px;
-    height: 200px;
-    background: red;
-    border-radius: 50%
-    padding: 20px;
-    margin: 10px;
-    background: #ff0030;
-    color: #fff;
-    font-size: 21px;
-    font-weight: bold;
-    line-height: 1.3em;
-    border: 2px dashed #fff;
-    border-radius: 50%;
-    box-shadow: 0 0 0 4px #ff0030, 2px 1px 6px 4px rgba(10, 10, 0, 0.5);
-    text-shadow: -1px -1px #aa3030;
-    font-weight: normal;
-    text-align: center;
-  }
+.container
+{
+  display: flex;
+  flex-direction: column;
+  float: left;
+  width: 250px;
+  justify-content: center;
+  align-items: center;
 
-  .badgeImage
-  {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+}
+
+.badges
+{
+  order: 1;
+}
+
+.unlockButton
+{
+  margin-top:50px;
+  order: 2;
+  width: 175px;
+  background-color: var(--simple-colors-default-theme-blue-8);
+  font-family: "Monaco";
+  display: inline-block;
+  outline: 0;
+  border: none;
+  cursor: pointer;
+  line-height: 1.2rem;
+  font-weight: 900;
+  padding: 8px 14px 9px;
+  font-size: 15px;
+  border-radius: 4px;
+  color: #fff;
+  height: 36px;
+  transition: all 75ms ease-in-out;
+  :hover{
+  box-shadow: 0 1px 4px rgb(0 0 0 / 30%);
   }
+  margin-left: 100px;
+                
+}
 
   `;
 
   constructor() {
     super();
-
+    this.badgeUnlocked = false;
   }
 
   render() {
     return html`
-
-<div class="badge">
-<div class="badgeImage">
-<img src="https://www.freeiconspng.com/thumbs/shield-png/shield-png-4.png" alt="shield" width="50" height="60">
-</div>
-
-</div>
-
+      <div class="container">
+        ${this.badgeUnlocked
+          ? html`<merit-badge></merit-badge>`
+          : html`<locked-badge></locked-badge>`}
+        <button class="unlockButton" @click="${this.unlockButtonClicked}">
+          ${this.badgeUnlocked ? "Unlocked" : "Unlock?"}
+        </button>
+      </div>
 
     `;
+  }
+
+  unlockButtonClicked() {
+    this.badgeUnlocked = !this.badgeUnlocked;
+  }
+
+  unlockButtonClicked() {
+    this.badgeUnlocked = !this.badgeUnlocked;
+    if (this.badgeUnlocked) {
+      this.createConfetti();
+    }
+  }
+
+  createConfetti() {
+    confetti({
+      particleCount: 500,
+      spread: 200,
+      origin: { y: 0.6 },
+    });
   }
 
 
 }
 
-customElements.define("badge-properties", BadgeProperties);
+customElements.define("badge-compile", BadgeCompile);
