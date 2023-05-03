@@ -19,7 +19,7 @@
     "canvas-confetti": "^1.4.0",
     "@lrnwebcomponents/absolute-position-behavior": "^4.2.0",
     "@lrnwebcomponents/simple-icon": "^4.2.0",
-    "@lrnwebcomponents/simple-colors/simple-colors.js": "^4.2.0",
+    "@lrnwebcomponents/simple-colors/simple-colors": "^4.2.0",
     "lit": "^2.0.2"
   },
   "devDependencies": {
